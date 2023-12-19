@@ -23,12 +23,12 @@ import eruda from "eruda";
 
 const App = () => {
   // Add eruda console for android device!
-  useEffect(() => {
+  /*useEffect(() => {
     eruda.init({
       container: document.getElementById("console"),
       tools: ["console", "network", "element"]
     });
-  }, []);
+  }, []);*/
 
   return (
     <main>
