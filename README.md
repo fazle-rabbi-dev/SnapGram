@@ -1,8 +1,25 @@
-# React + Vite
+## Snapgram
+Snapgram is an instagram clone social media app.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+### Technologies used
+* React
+* TailwindCSS
+* Appwrite
+* React-Query
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Live
+* https://snap-gram-two.vercel.app
+
+### .env setup
+```env
+VITE_APPWRITE_URL="https://cloud.appwrite.io/v1"
+VITE_APPWRITE_PROJECT_ID=""
+VITE_APPWRITE_DATABASE_ID=""
+VITE_APPWRITE_STORAGE_ID=""
+VITE_APPWRITE_USER_COLLECTION_ID=""
+VITE_APPWRITE_POST_COLLECTION_ID=""
+VITE_APPWRITE_SAVES_COLLECTION_ID=""
+VITE_AUTH_SUCCESS_URL="<Success Url For Github Authentication>"
+VITE_AUTH_FAILURE_URL="<Failure Url For Github Authentication>"
+```
