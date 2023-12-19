@@ -510,6 +510,29 @@ export async function getSavedPosts(user) {
 
 export async function updateProfile(user){
   try {
+
+    let image = {
+      imageUrl: user?.imageUrl,
+      imageId: user?.imageId
+    };
+    
+    
+    const hasFileToUpdate = user?.file.length > 0;
+    if (hasFileToUpdate) {
+      // Upload new file to appwrite storage
+      const uploadedFile = await uploadFile(user.file[0]);
+      if (!uploadedFile) throw Error;
+
+      // Get new file url
+      const fileUrl = getFilePreview(uploadedFile.$id);
+      if (!fileUrl) {
+        await deleteFile(uploadedFile.$id);
+        throw Error;
+      }
+
+      image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
+    }
+    
     const docId = user?.id;
     const updatedDoc = await databases.updateDocument(
       appwriteConfig.databaseId,
@@ -517,10 +540,28 @@ export async function updateProfile(user){
       docId,
       {
         name: user?.name,
-        bio: user?.bio
+        bio: user?.bio,
+        ...image
       }
     );
+    
+    // Failed to update
+    if (!updatedDoc) {
+      // Delete new file that has been recently uploaded
+      if (hasFileToUpdate) {
+        await deleteFile(image.imageId);
+      }
 
+      // If no new file uploaded, just throw error
+      throw Error;
+    }
+
+    // Safely delete old file after successful update
+    if (hasFileToUpdate) {
+      await deleteFile(user.imageId);
+    }
+
+    
     console.log(`> Updated Successful.`)
     
     return updatedDoc;

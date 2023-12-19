@@ -4,7 +4,7 @@ import { updateProfileValidationSchema } from "@/lib/helpers/utils";
 import { useUpdateProfile } from "@/lib/react-query/queries"
 import showToast from "@/lib/helpers/showToast"
 import { useNavigate } from "react-router-dom"
-
+import { useUserContext } from "@/context/AuthContext"
 
 const EditProfileForm = ({ user }) => {
   const {
@@ -17,23 +17,31 @@ const EditProfileForm = ({ user }) => {
     resolver: yupResolver(updateProfileValidationSchema),
     defaultValues: {
       name: "" || user?.name,
-      bio: "" || user?.bio
+      bio: "" || user?.bio,
+      file: []
     }
   });
   
   const navigate = useNavigate()
   const { mutateAsync: updateProfile, isPending: isUpdating } = useUpdateProfile()
+  const { isAuthenticated, user: loggedInUser, setUser} = useUserContext()
   
   const handleUpdate = async (data) => {
-    console.log("Update fired...")
-    console.log({user})
     const updatedDoc = await updateProfile({
       ...data,
-      id: user.$id
+      id: user.$id,
+      imageUrl: user.imageUrl,
+      imageId: user.imageId
     })
     if(updatedDoc){
       showToast("Updated successful")
+      setUser({
+        ...loggedInUser,
+        imageUrl: updatedDoc.imageUrl
+      })
       navigate(`/profile/${user.$id}`)
+    }else{
+      showToast("Update failed")
     }
   };
   
@@ -65,6 +73,20 @@ const EditProfileForm = ({ user }) => {
         />
         {errors?.bio && (
           <p className="text-sm text-light-4">{errors?.bio?.message}</p>
+        )}
+      </div>
+      <div className="my-2">
+        <label htmlFor="" className="mb-2">
+          Profile pic
+        </label>
+        <input
+          className="shad-input w-full"
+          type="file"
+          id="file"
+          {...register("file")}
+        />
+        {errors?.file && (
+          <p className="text-sm text-light-4">{errors?.file?.message}</p>
         )}
       </div>
       <button disabled={isUpdating} className="submit_btn" type="submit">

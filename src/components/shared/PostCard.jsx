@@ -10,7 +10,7 @@ const PostCard = ({ post }) => {
   const { user } = useUserContext();
 
   return (
-    <div className="bg-dark-3 border-[.5px] border-blue-800 shadow shadow-white px-2 py-4 rounded">
+    <div className="bg-dark-3 border-[.5px] border-gray-600 px-2 py-4 rounded">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-2">
           <Link to={`/profile/${creator?.$id}`}>

@@ -8,7 +8,7 @@ export const createPostValidationSchema = yup.object().shape({
 
 export const updateProfileValidationSchema = yup.object().shape({
   name: yup.string().required('Name is required'),
-  bio: yup.string().required('Bio is required')
+  bio: yup.string().required('Bio is required'),
 });
 
 export function formatDateString(dateString) {
