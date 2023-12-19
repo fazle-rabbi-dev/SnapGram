@@ -37,11 +37,7 @@ const Success = () => {
   return (
     <div className="w-full">
       <h2 className="h2-bold">Success</h2>
-      <button className="block mt-4" onClick={() => saveUser()}>
-        {
-          isSavingUser ? "Saving User" : "Save User"
-        }
-      </button>
+      
     </div>
   )
 }
