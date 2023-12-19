@@ -19,5 +19,5 @@ export const account = new Account(client);
 export const databases = new Databases(client);
 export const storage = new Storage(client);
 export const avatars = new Avatars(client);
-export const successUrl = "http://localhost:5173/auth/success"
-export const failureUrl = "http://localhost:5173/failed"
+export const successUrl = import.meta.env.VITE_AUTH_SUCCESS_URL
+export const failureUrl = import.meta.env.VITE_AUTH_FAILURE_URL
