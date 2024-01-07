@@ -1,7 +1,8 @@
 # Snapgram
 Snapgram is an instagram clone social media app.
 
-*This project was created by watching tutorials on YouTube.*
+> [!Note]
+> This project was created by watching tutorials on YouTube channel (Javascript Mastery).
 
 ### Technologies used
 * Vite + React
