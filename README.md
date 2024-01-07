@@ -1,14 +1,16 @@
-## Snapgram
+# Snapgram
 Snapgram is an instagram clone social media app.
 
+*This project was created by watching tutorials on YouTube.*
 
 ### Technologies used
-* React
+* Vite + React
 * TailwindCSS
 * Appwrite
 * React-Query
+* React-Hook-Form
 
-### Live
+### Live Demo 🎉
 * https://snap-gram-two.vercel.app
 
 ### .env setup
